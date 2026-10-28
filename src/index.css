@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-brat: #8ace00;
+  --color-ink: #0a0a0a;
+  --color-charcoal: #1f1f1f;
+  --color-paper: #f5f5f5;
+  --color-ash: #ededed;
+  --color-mute: #1a1a1a;
+  --color-white: #ffffff;
+}
+
 body {
   margin: 0;
+  background: var(--color-brat);
+  color: var(--color-ink);
+  font-family: Inter, Arial, sans-serif;
 }
 
 #root {

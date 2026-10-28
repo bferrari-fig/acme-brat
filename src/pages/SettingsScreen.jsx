@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import NavBar from '../components/NavBar.jsx'
+import AppShell from '../components/AppShell.jsx'
 import { InputField } from '../components/InputField.jsx'
 import ToggleSwitch from '../components/ToggleSwitch.jsx'
 import BigButton from '../components/BigButton.jsx'
@@ -11,13 +11,12 @@ export default function SettingsScreen() {
   const [region, setRegion] = useState('us-east')
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB]">
-      <NavBar brand="Acme" />
-      <div className="mx-auto max-w-2xl px-6 py-8">
-        <h1 className="mb-2 text-2xl font-semibold text-[#374151]">Workspace settings</h1>
-        <p className="mb-6 text-sm text-[#6B7280]">Changes apply to this environment only.</p>
+    <AppShell>
+      <div className="mx-auto max-w-[560px]">
+        <h1 className="m-0 text-center font-black text-5xl lowercase tracking-tight">workspace settings</h1>
+        <p className="mb-6 mt-3 text-center text-base text-mute">Changes apply to this environment only.</p>
 
-        <div className="rounded-lg border border-[#E5E7EB] bg-white p-6">
+        <div className="bg-white p-6 shadow-hard">
           <InputField
             labelText="Workspace name"
             id="ws-name"
@@ -26,41 +25,39 @@ export default function SettingsScreen() {
             placeholder="e.g. Acme"
           />
 
-          <div className="mb-2 flex items-center gap-4">
-            <div>
-              <div className="text-sm font-semibold text-[#374151]">Email notifications</div>
-              <div className="mt-1 text-xs text-[#9CA3AF]">Digest to admins</div>
+          <div className="mb-4 flex items-center gap-4">
+            <div className="min-w-0 flex-1">
+              <div className="text-sm font-bold text-ink">Email notifications</div>
+              <div className="mt-1 text-xs font-medium text-mute">Digest to admins</div>
             </div>
             <ToggleSwitch isOn={notifyEmail} whenToggle={setNotifyEmail} />
           </div>
 
-          <div className="mb-5 mt-2 flex items-center gap-4">
-            <div>
-              <div className="text-sm font-semibold text-[#374151]">Beta features</div>
-              <div className="mt-1 text-xs text-[#9CA3AF]">May be unstable</div>
+          <div className="mb-5 flex items-center gap-4">
+            <div className="min-w-0 flex-1">
+              <div className="text-sm font-bold text-ink">Beta features</div>
+              <div className="mt-1 text-xs font-medium text-mute">May be unstable</div>
             </div>
             <ToggleSwitch isOn={betaFeatures} whenToggle={setBetaFeatures} />
           </div>
 
-          <label htmlFor="region" className="mb-2 block text-sm font-semibold text-[#374151]">
+          <label htmlFor="region" className="mb-2 block text-sm font-bold text-ink">
             Data region
           </label>
           <select
             id="region"
             value={region}
             onChange={(e) => setRegion(e.target.value)}
-            className="mb-5 w-full rounded-md border border-[#D1D5DB] bg-white px-3 py-2 text-sm text-[#111827]"
+            className="mb-5 w-full border-2 border-ink bg-brat px-3.5 py-3 text-base text-ink"
           >
             <option value="us-east">US East</option>
             <option value="eu-west">EU West</option>
             <option value="apac">APAC</option>
           </select>
 
-          <BigButton variant="primary" extraStyle={{ marginTop: 4 }}>
-            Save changes
-          </BigButton>
+          <BigButton variant="primary">Save changes</BigButton>
         </div>
       </div>
-    </div>
+    </AppShell>
   )
 }

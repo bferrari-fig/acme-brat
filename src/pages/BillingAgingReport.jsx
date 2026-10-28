@@ -1,51 +1,41 @@
 import { Link, useNavigate } from 'react-router-dom'
-import NavBar from '../components/NavBar.jsx'
+import AppShell from '../components/AppShell.jsx'
 import BigButton from '../components/BigButton.jsx'
 
 const buckets = [
-  { label: 'Current', amount: '$18,400', color: '#10B981' },
-  { label: '1–30 days', amount: '$3,200', color: '#3B82F6' },
-  { label: '31–60 days', amount: '$890', color: '#9CA3AF' },
-  { label: '61+ days', amount: '$120', color: '#EF4444' },
+  { label: 'Current', amount: '$18,400', tone: 'bg-paper text-ink' },
+  { label: '1–30 days', amount: '$3,200', tone: 'bg-ink text-white' },
+  { label: '31–60 days', amount: '$890', tone: 'border-2 border-ink bg-brat text-ink' },
+  { label: '61+ days', amount: '$120', tone: 'bg-charcoal text-white' },
 ]
 
 export default function BillingAgingReport() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6]">
-      <NavBar brand="Acme" />
-      <div className="mx-auto max-w-xl px-6 py-8">
-        <p className="mb-3 text-sm">
-          <Link to="/billing" className="text-[#2563EB] no-underline hover:underline">
-            Billing
-          </Link>
-          <span className="text-[#9CA3AF]"> / </span>
-          <span className="text-[#6B7280]">Aging</span>
-        </p>
+    <AppShell>
+      <p className="m-0 text-[13px] font-bold">
+        <Link to="/billing" className="text-ink no-underline">billing</Link>
+        <span className="text-mute"> / </span>
+        <span>aging</span>
+      </p>
+      <h1 className="m-0 mt-3 font-black text-5xl lowercase tracking-tight">accounts receivable aging</h1>
+      <p className="mt-3 text-base text-mute">A snapshot, not a live ledger.</p>
 
-        <h1 className="mb-2 text-2xl font-bold text-[#374151]">Accounts receivable aging</h1>
-        <p className="mb-6 text-sm text-[#6B7280]">Snapshot only — not wired to a live ledger.</p>
-
-        <div className="flex flex-col gap-3">
-          {buckets.map((b) => (
-            <div
-              key={b.label}
-              className="flex items-center justify-between rounded-lg border border-[#E5E7EB] bg-white p-4 text-[15px]"
-              style={{ borderLeftWidth: 4, borderLeftColor: b.color }}
-            >
-              <span className="font-semibold text-[#374151]">{b.label}</span>
-              <span className="font-semibold text-[#111827]">{b.amount}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6">
-          <BigButton variant="ghost" onClick={() => navigate('/billing')}>
-            ← Back to invoices
-          </BigButton>
-        </div>
+      <div className="mt-6 flex max-w-xl flex-col gap-3">
+        {buckets.map((b) => (
+          <div key={b.label} className={`flex items-center justify-between px-5 py-4 text-[15px] font-bold ${b.tone}`}>
+            <span>{b.label}</span>
+            <span>{b.amount}</span>
+          </div>
+        ))}
       </div>
-    </div>
+
+      <div className="mt-6">
+        <BigButton variant="ghost" onClick={() => navigate('/billing')}>
+          back to invoices
+        </BigButton>
+      </div>
+    </AppShell>
   )
 }
